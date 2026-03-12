@@ -1,0 +1,815 @@
+/* ════════════════════════════════════════════
+   VARIÁVEIS — TEMA CLARO
+   Paleta contida: azul como único acento,
+   status de validade com tons dessaturados.
+════════════════════════════════════════════ */
+:root {
+  --bg:         #f7f8fa;
+  --white:      #ffffff;
+  --border:     #e4e7ed;
+  --border-md:  #d1d5db;
+
+  --text:       #111827;
+  --text-light: #6b7280;
+  --text-muted: #9ca3af;
+
+  --blue:       #3b82f6;
+  --blue-soft:  #dbeafe;
+  --blue-hover: #f5f8ff;   /* hover de linha — quase invisível */
+
+  --ok:         #16a34a;
+  --ok-bg:      #f0fdf4;
+  --ok-border:  #bbf7d0;
+  --warn:       #b45309;
+  --warn-bg:    #fefce8;
+  --warn-border:#fde68a;
+  --danger:     #dc2626;
+  --danger-bg:  #fef2f2;
+  --danger-border:#fecaca;
+  --muted-bg:   #f3f4f6;
+
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
+  --shadow:     0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* ════════════════════════════════════════════
+   TEMA ESCURO
+   Superfícies escuras com pouca saturação.
+   Cores de status mantidas mas sem fundos vivos.
+════════════════════════════════════════════ */
+body.dark {
+  --bg:         #12141a;
+  --white:      #1c1f28;
+  --border:     #2a2e3a;
+  --border-md:  #363b4a;
+
+  --text:       #e5e7eb;
+  --text-light: #9ca3af;
+  --text-muted: #6b7280;
+
+  --blue:       #60a5fa;
+  --blue-soft:  #1e2a3f;
+  --blue-hover: #1a1e2a;
+
+  --ok:         #4ade80;
+  --ok-bg:      #0d1f14;
+  --ok-border:  #166534;
+  --warn:       #fbbf24;
+  --warn-bg:    #1a1500;
+  --warn-border:#78350f;
+  --danger:     #f87171;
+  --danger-bg:  #1c0a0a;
+  --danger-border:#7f1d1d;
+  --muted-bg:   #1c1f28;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
+  --shadow:     0 4px 16px rgba(0,0,0,0.5);
+}
+
+/* ════════════════════════════════════════════
+   RESET
+════════════════════════════════════════════ */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* ════════════════════════════════════════════
+   CABEÇALHO
+════════════════════════════════════════════ */
+header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 13px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-icon { font-size:23px; line-height:1; }
+
+.logo-name {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1;
+}
+
+.logo-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+
+.btn-tema {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 6px 11px;
+  font-size: 15px;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: border-color 0.2s;
+  line-height: 1;
+}
+.btn-tema:hover { border-color: var(--blue); }
+
+.header-stats { display:flex; gap:8px; }
+
+.stat-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 86px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  user-select: none;
+}
+.stat-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.08);
+}
+
+.stat-label { font-size:10px; color:var(--text-muted); white-space:nowrap; }
+
+.stat-num {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.stat-num.blue   { color: var(--blue); }
+.stat-num.yellow { color: var(--warn); }
+.stat-num.red    { color: var(--danger); }
+.stat-num.gray   { color: var(--text-muted); }
+
+/* ════════════════════════════════════════════
+   CONTEÚDO
+════════════════════════════════════════════ */
+.main { padding:22px 28px; max-width:1440px; margin:0 auto; }
+
+/* ════════════════════════════════════════════
+   ABAS
+════════════════════════════════════════════ */
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 9px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab:hover { color: var(--text-light); }
+.tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight:600; }
+
+/* ════════════════════════════════════════════
+   PAINÉIS
+════════════════════════════════════════════ */
+.panel        { display:none; }
+.panel.active { display:block; }
+.panel-header { margin-bottom:18px; }
+
+.panel-header h2 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+}
+.panel-header small { color:var(--text-muted); font-size:12px; }
+
+/* ════════════════════════════════════════════
+   BARRA DE FERRAMENTAS
+════════════════════════════════════════════ */
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ── Campo de busca ── */
+.search-wrap {
+  flex: 1;
+  min-width: 240px;
+  position: relative;
+}
+
+.search-wrap {
+  flex: 1;
+  min-width: 240px;
+}
+
+.search-wrap input {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+  display: block;
+}
+.search-wrap input::placeholder { color: var(--text-muted); }
+.search-wrap input:focus { border-color: var(--blue); }
+
+/* Selects da toolbar */
+select {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 9px 32px 9px 12px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+  /* Remove aparência nativa do SO que causa bordas quadradas */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Seta customizada discreta */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+select:hover { border-color: var(--text-muted); }
+
+/* Botão Entrada — mesmo estilo do Saída, só muda a cor */
+.btn-primary {
+  background: var(--white);
+  color: var(--blue);
+  border: 1px solid var(--border);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.btn-primary:hover { border-color: var(--blue); }
+
+/* Botão Saída — contido, sem fundo vermelho */
+.btn-secondary {
+  background: var(--white);
+  color: var(--danger);
+  border: 1px solid var(--border);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.btn-secondary:hover { border-color: var(--danger); }
+
+/* Botão outline genérico */
+.btn-outline {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-outline:hover { border-color: var(--text-muted); color: var(--text); }
+
+/* ════════════════════════════════════════════
+   TABELA
+════════════════════════════════════════════ */
+.table-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+table { width:100%; border-collapse:collapse; }
+
+thead tr {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+th:hover { color: var(--text-light); }
+th span  { font-size:10px; margin-left:3px; color:var(--blue); }
+
+.text-right  { text-align: right; }
+.text-center { text-align: center; }
+
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* Hover de linha: toque levíssimo, sem cor saturada */
+.produto-row:hover td { background: var(--blue-hover); }
+
+.nome-produto {
+  max-width: 340px;
+}
+
+/* Linha do nome: flex para manter nome + emb + badge sempre alinhados */
+.nome-linha {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  line-height: 1.4;
+}
+
+.nome-texto {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Apresentação (ex: "50ml", "10 comp") — mesmo estilo do nome */
+.nome-emb {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.qty-cell {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: right;
+}
+.qty-cell.zero { color: var(--text-muted); }
+.qty-cell.low  { color: var(--warn); }
+.qty-cell.ok   { color: var(--ok); }
+
+/* ════════════════════════════════════════════
+   BADGES DE VALIDADE
+════════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.badge.ok       { background:var(--ok-bg);      color:var(--ok);      border-color:var(--ok-border); }
+.badge.alerta   { background:var(--warn-bg);    color:var(--warn);    border-color:var(--warn-border); }
+.badge.vencido  { background:var(--danger-bg);  color:var(--danger);  border-color:var(--danger-border); }
+.badge.sem-data { background:var(--muted-bg);   color:var(--text-muted); border-color:var(--border); }
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Badge de tipo — neutro, cinza */
+.badge-tipo {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--muted-bg);
+  color: var(--text-light);
+  border: 1px solid var(--border);
+}
+
+/* ════════════════════════════════════════════
+   BOTÃO DE LOTES
+════════════════════════════════════════════ */
+.btn-toggle-lotes {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 10px;
+  padding: 1px 6px;
+  cursor: pointer;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-toggle-lotes:hover { border-color:var(--blue); color:var(--blue); }
+
+.btn-editar-lote {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-editar-lote:hover { background:var(--border); color:var(--text); }
+
+/* ════════════════════════════════════════════
+   BOTÕES DE AÇÃO NA LINHA
+════════════════════════════════════════════ */
+.row-actions { display:flex; gap:5px; justify-content:flex-end; }
+
+.btn-sm {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-sm.entry { color:var(--ok);     border-color:var(--ok-border); }
+.btn-sm.entry:hover { background:var(--ok-bg); }
+.btn-sm.exit  { color:var(--danger); border-color:var(--danger-border); }
+.btn-sm.exit:hover  { background:var(--danger-bg); }
+
+/* ════════════════════════════════════════════
+   HISTÓRICO DE MOVIMENTOS
+════════════════════════════════════════════ */
+.hist-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 13px 18px;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hist-type {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.hist-type.entrada { background:var(--ok-bg);     color:var(--ok);     border:1px solid var(--ok-border); }
+.hist-type.saida   { background:var(--danger-bg); color:var(--danger); border:1px solid var(--danger-border); }
+
+.hist-product { font-size:13px; font-weight:500; margin:3px 0 2px; }
+.hist-obs     { font-size:11px; color:var(--text-muted); }
+
+.hist-qty {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: right;
+}
+.hist-qty.entrada { color:var(--ok); }
+.hist-qty.saida   { color:var(--danger); }
+.hist-date { font-size:11px; color:var(--text-muted); text-align:right; margin-top:2px; }
+
+/* ════════════════════════════════════════════
+   ESTADO VAZIO
+════════════════════════════════════════════ */
+.empty-state { text-align:center; padding:56px 20px; color:var(--text-muted); }
+.empty-icon  { font-size:36px; margin-bottom:12px; opacity:0.4; }
+.empty-state p     { font-size:14px; margin-bottom:4px; }
+.empty-state small { font-size:12px; }
+
+/* ════════════════════════════════════════════
+   MODAL
+════════════════════════════════════════════ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.open { display:flex; }
+
+.modal {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 520px;
+  max-width: 96vw;
+  padding: 26px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.modal-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: background 0.15s;
+}
+.modal-close:hover { background:var(--bg); }
+
+.modal-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ════════════════════════════════════════════
+   FORMULÁRIOS
+════════════════════════════════════════════ */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.form-row.full { grid-template-columns: 1fr; }
+
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+.modal select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border-md);
+  color: var(--text);
+  padding: 9px 11px;
+  border-radius: 7px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+/* Seta para selects dentro do modal */
+.modal select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+input:focus, textarea:focus, .modal select:focus {
+  border-color: var(--blue);
+  background-color: var(--white);
+}
+
+.form-divider { border:none; border-top:1px solid var(--border); margin:16px 0; }
+.form-hint    { font-size:11px; color:var(--text-muted); margin-top:4px; }
+
+/* ════════════════════════════════════════════
+   SEÇÕES DE ALERTA
+════════════════════════════════════════════ */
+.alert-section       { margin-bottom:26px; }
+.alert-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.alert-section-title.red    { color:var(--danger); background:var(--danger-bg); border:1px solid var(--danger-border); }
+.alert-section-title.yellow { color:var(--warn);   background:var(--warn-bg);   border:1px solid var(--warn-border); }
+.alert-section-title.gray   { color:var(--text-light); background:var(--muted-bg); border:1px solid var(--border); }
+
+.all-ok      { text-align:center; padding:56px 20px; }
+.all-ok-icon { font-size:44px; margin-bottom:12px; }
+.all-ok p    { font-size:15px; font-weight:600; color:var(--ok); }
+.all-ok small{ font-size:12px; color:var(--text-muted); }
+
+/* Linhas de lote (compatibilidade) */
+.lote-row td { background:var(--bg); padding-top:6px; padding-bottom:6px; }
+.lote-row:hover td { background:var(--blue-hover); }
+
+/* ════════════════════════════════════════════
+   RESPONSIVIDADE — MOBILE
+   Breakpoints: tablet ≤ 768px, phone ≤ 480px
+════════════════════════════════════════════ */
+
+/* ── Tablet e abaixo ── */
+@media (max-width: 768px) {
+
+  /* Cabeçalho empilha em coluna */
+  header {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  /* Stat cards menores, com scroll horizontal se precisar */
+  .header-stats {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    gap: 6px;
+  }
+
+  .stat-card {
+    min-width: 72px;
+    padding: 6px 10px;
+    flex-shrink: 0;
+  }
+
+  .stat-num { font-size: 17px; }
+  .stat-label { font-size: 9px; }
+
+  /* Botão tema fica ao lado do logo */
+  .btn-tema { order: 2; }
+
+  /* Conteúdo com menos padding */
+  .main { padding: 14px 12px; }
+
+  /* Toolbar quebra em duas linhas */
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .search-wrap {
+    width: 100%;
+    flex: none;
+    min-width: unset;
+  }
+
+  /* Filtros e botões ficam lado a lado na segunda linha */
+  #filter-status,
+  #filter-tipo {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  /* Botões Entrada/Saída/Novo — compactos */
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  /* Tabela: esconde colunas menos importantes */
+  th.col-lote,
+  td.col-lote,
+  th.col-marca,
+  td.col-marca {
+    display: none;
+  }
+
+  th, td { padding: 10px 10px; font-size: 12px; }
+
+  .qty-cell { font-size: 14px; }
+
+  /* Ações só mostram ícones — esconde texto no mobile */
+  .btn-sm {
+    padding: 4px 7px;
+    font-size: 11px;
+  }
+
+  /* Abas com menos padding */
+  .tab { padding: 8px 12px; font-size: 12px; }
+
+  /* Modal ocupa quase a tela toda */
+  .modal {
+    width: 95vw;
+    padding: 18px;
+    max-height: 92vh;
+  }
+
+  /* Formulário em coluna única */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Histórico mais compacto */
+  .hist-item { padding: 10px 12px; }
+  .hist-qty  { font-size: 17px; }
+}
+
+/* ── Celular pequeno ── */
+@media (max-width: 480px) {
+
+  .logo-name { font-size: 15px; }
+  .logo-sub  { display: none; } /* esconde subtítulo pra ganhar espaço */
+
+  /* Cabeçalho: logo + tema numa linha, stats embaixo */
+  header { padding: 10px 12px; }
+
+  .main { padding: 10px 10px; }
+
+  /* Tabela: esconde também Tipo em tela muito pequena */
+  th.col-tipo, td.col-tipo { display: none; }
+
+  /* Nome do produto pode quebrar linha */
+  .nome-produto { max-width: 160px; word-break: break-word; }
+
+  /* Botões de ação empilham */
+  .row-actions { flex-direction: column; gap: 3px; }
+
+  .btn-sm { width: 100%; text-align: center; }
+
+  /* Toolbar: todos os selects em largura total */
+  #filter-status,
+  #filter-tipo,
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tab { padding: 7px 8px; font-size: 11px; }
+}

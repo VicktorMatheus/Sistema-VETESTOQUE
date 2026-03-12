@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estoque — Clínica Veterinária</title>
+
+  <!-- Fontes do Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       CABEÇALHO — Logo e resumo rápido
+  ════════════════════════════════════════ -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🐾</div>
+      <div>
+        <div class="logo-name">VetEstoque</div>
+        <div class="logo-sub">Controle de medicamentos</div>
+      </div>
+    </div>
+
+    <!-- Botão para trocar entre tema claro e escuro -->
+    <button class="btn-tema" id="btn-tema" onclick="alternarTema()" title="Alternar tema">
+      <span id="tema-icone">🌙</span>
+    </button>
+
+    <!-- Cartões com totais rápidos — clicáveis! -->
+    <div class="header-stats">
+      <!-- Total: vai para estoque sem filtro -->
+      <div class="stat-card" onclick="irParaEstoque('')" title="Ver todos os produtos">
+        <span class="stat-label">Total de itens</span>
+        <span class="stat-num blue" id="stat-total">—</span>
+      </div>
+      <!-- Alerta: vai para estoque filtrado por 'alerta' -->
+      <div class="stat-card" onclick="irParaEstoque('alerta')" title="Ver produtos próximos do vencimento">
+        <span class="stat-label">⚠ Alerta (90 dias)</span>
+        <span class="stat-num yellow" id="stat-warn">—</span>
+      </div>
+      <!-- Vencidos: vai para estoque filtrado por 'vencido' -->
+      <div class="stat-card" onclick="irParaEstoque('vencido')" title="Ver produtos vencidos">
+        <span class="stat-label">✕ Vencidos</span>
+        <span class="stat-num red" id="stat-venc">—</span>
+      </div>
+      <!-- Zero: vai para estoque filtrado por 'zero' -->
+      <div class="stat-card" onclick="irParaEstoque('zero')" title="Ver produtos sem estoque">
+        <span class="stat-label">Estoque zero</span>
+        <span class="stat-num gray" id="stat-zero">—</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       CONTEÚDO PRINCIPAL
+  ════════════════════════════════════════ -->
+  <div class="main">
+
+    <!-- ABAS de navegação -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('estoque')">📦 Estoque</button>
+      <button class="tab" onclick="switchTab('movimentos')">📋 Movimentos</button>
+      <button class="tab" onclick="switchTab('alertas')">🔔 Alertas</button>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA 1: ESTOQUE
+         Lista todos os produtos cadastrados
+    ────────────────────────────────────── -->
+    <div class="panel active" id="tab-estoque">
+
+      <!-- Barra de busca e filtros -->
+      <div class="toolbar">
+        <div class="search-wrap">
+          <input type="text" id="search" placeholder="Buscar produto, lote ou marca..." oninput="renderTable()" />
+        </div>
+
+        <!-- Filtrar por status -->
+        <select id="filter-status" onchange="renderTable()">
+          <option value="">Todos os status</option>
+          <option value="vencido">Vencidos</option>
+          <option value="alerta">Alerta (90 dias)</option>
+          <option value="ok">OK</option>
+          <option value="zero">Estoque zero</option>
+        </select>
+
+        <!-- Filtrar por tipo de embalagem -->
+        <select id="filter-tipo" onchange="renderTable()">
+          <option value="">Todos os tipos</option>
+          <option value="ampola">Ampola</option>
+          <option value="frasco">Frasco</option>
+          <option value="frasco-ampola">Frasco-ampola</option>
+          <option value="unidade">Unidade</option>
+          <option value="comprimido">Comprimido</option>
+          <option value="litro">Litro</option>
+          <option value="galao">Galão</option>
+          <option value="metro">Metro</option>
+          <option value="caixa">Caixa</option>
+          <option value="pacote">Pacote</option>
+          <option value="outro">Outro</option>
+        </select>
+
+        <!-- Botões de ação -->
+        <button class="btn-primary" onclick="openModal('entrada')">↑ Entrada</button>
+        <button class="btn-secondary" onclick="openModal('saida')">↓ Saída</button>
+        <button class="btn-outline" onclick="openModal('novo')">+ Novo produto</button>
+      </div>
+
+      <!-- Tabela de produtos -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th onclick="sortBy('nome')">Produto <span id="sort-nome"></span></th>
+              <th class="col-tipo" onclick="sortBy('tipo')">Tipo <span id="sort-tipo"></span></th>
+              <th onclick="sortBy('qty')" class="text-right">Qtd <span id="sort-qty"></span></th>
+              <th onclick="sortBy('validade')">Validade <span id="sort-validade"></span></th>
+              <th class="col-lote">Lote</th>
+              <th class="col-marca">Marca</th>
+              <th class="text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+
+        <!-- Aparece quando nenhum produto é encontrado na busca -->
+        <div id="table-empty" class="empty-state" style="display:none">
+          <div class="empty-icon">🔍</div>
+          <p>Nenhum produto encontrado</p>
+          <small>Tente mudar os filtros ou a busca</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA 2: MOVIMENTOS
+         Histórico de entradas e saídas
+    ────────────────────────────────────── -->
+    <div class="panel" id="tab-movimentos">
+      <div class="panel-header">
+        <h2>Histórico de movimentos</h2>
+        <small>Todas as entradas e saídas registradas</small>
+      </div>
+      <div id="hist-list"></div>
+      <div id="hist-empty" class="empty-state" style="display:none">
+        <div class="empty-icon">📋</div>
+        <p>Nenhum movimento registrado ainda</p>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA 3: ALERTAS
+         Produtos vencidos, próximos do venc. e zerados
+    ────────────────────────────────────── -->
+    <div class="panel" id="tab-alertas">
+      <div class="panel-header">
+        <h2>Alertas do estoque</h2>
+        <small>Produtos que precisam de atenção</small>
+      </div>
+      <div id="alert-list"></div>
+    </div>
+
+  </div><!-- /.main -->
+
+  <!-- ════════════════════════════════════════
+       MODAL — Janela para registrar ações
+       Aparece ao clicar em Entrada / Saída / Novo Produto
+  ════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Nova Entrada</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modal-form-content"></div>
+      <div class="modal-footer">
+        <button class="btn-outline" onclick="closeModal()">Cancelar</button>
+        <button class="btn-primary" id="modal-submit-btn" onclick="submitModal()">Registrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>
