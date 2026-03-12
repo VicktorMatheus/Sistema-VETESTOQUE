@@ -1,6 +1,3 @@
-# Sistema-de-estoque-Clinica-Veterin-ria-
-Sistema front-end de controle de estoque para clínicas veterinárias desenvolvido com HTML, CSS e JavaScript. O projeto permite gerenciar produtos por lotes, acompanhar datas de validade e registrar movimentações de entrada e saída. Futuras melhorias incluem integração com back-end e banco de dados.
-
 # VetEstoque
 
 VetEstoque é um sistema simples de controle de estoque de medicamentos para clínicas veterinárias.
@@ -58,7 +55,7 @@ Algumas melhorias planejadas para o projeto:
 
 <img width="1920" height="1080" alt="{91B1ABB9-6B81-4B3B-BF05-FFAF69D799D6}" src="https://github.com/user-attachments/assets/04b60dae-3aa8-48b9-92d8-653b69c22c8f" />
 
-Modelo para celular - Modelo utilizado iphone 14 Pro Max
+Modelo para celular - Modelo utilizado Iphone 14 Pro Max
 
 <img width="406" height="878" alt="{C4D38866-8000-466F-A2DE-1B882BA9B77D}" src="https://github.com/user-attachments/assets/03cc52de-fc45-4f41-9c5b-9612e4f122f0" />
 
