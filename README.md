@@ -51,7 +51,8 @@ Algumas melhorias planejadas para o projeto:
 - relatórios de movimentação
 - melhorias na interface
 
-- <img width="1920" height="1080" alt="{D7AC36AD-D99F-462B-8FCD-6D4E5EC681C2}" src="https://github.com/user-attachments/assets/a1a8e207-3991-47a4-9ac9-4b1f029cd376" />
+
+<img width="1920" height="1080" alt="{D7AC36AD-D99F-462B-8FCD-6D4E5EC681C2}" src="https://github.com/user-attachments/assets/a1a8e207-3991-47a4-9ac9-4b1f029cd376" />
 
 <img width="1920" height="1080" alt="{D440F80F-75AC-453B-AD4F-CFD540CD4F2D}" src="https://github.com/user-attachments/assets/6cceb050-035d-441e-9b4f-44dba66943dd" />
 
