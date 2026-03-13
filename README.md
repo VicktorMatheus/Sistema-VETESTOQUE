@@ -48,6 +48,12 @@ Algumas melhorias planejadas para o projeto:
 - relatórios de movimentação
 - melhorias na interface
 
+## Demonstração online
+
+Você pode testar o sistema funcionando aqui:
+
+🔗 https://vicktormatheus.github.io/Sistema-VETESTOQUE/
+
 
 <img width="1920" height="1080" alt="{D7AC36AD-D99F-462B-8FCD-6D4E5EC681C2}" src="https://github.com/user-attachments/assets/a1a8e207-3991-47a4-9ac9-4b1f029cd376" />
 
