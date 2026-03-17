@@ -2,7 +2,7 @@
 
 VetEstoque é um sistema simples de controle de estoque de medicamentos para clínicas veterinárias.
 
-O projeto foi desenvolvido como prática de desenvolvimento web utilizando HTML, CSS e JavaScript puro, rodando totalmente no navegador sem necessidade de servidor ou banco de dados.
+O projeto foi desenvolvido como prática de desenvolvimento web utilizando HTML, CSS e JavaScript, rodando totalmente no navegador sem necessidade de servidor ou banco de dados.
 
 ## Funcionalidades
 
